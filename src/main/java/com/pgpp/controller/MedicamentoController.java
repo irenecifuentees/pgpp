@@ -1,20 +1,20 @@
 package com.pgpp.controller;
 
-import java.util.List;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pgpp.model.Medicamento;
 import com.pgpp.service.MedicamentoService;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 // Se puede añadir un prefijo de mapeo a nivel de clase para simplificar las URLs:
@@ -23,71 +23,42 @@ public class MedicamentoController {
 
     @Autowired
     private MedicamentoService medicamentoService;
-    
 
-    // Devuelve todos los medicamentos
-    @GetMapping("/medicamentos")
-    public List<Medicamento> getAllMedicamentos() {
-        return medicamentoService.getAllMedicamentos();
-    }
-
-    // Devuelve un medicamento por ID 
-    @GetMapping("/medicamento/{id}")
-    public Medicamento getMedicamento(@PathVariable("id") Long id) {
-        return medicamentoService.getMedicamento(id);
-    }
-    
-    // Crea un nuevo medicamento 
-    @PostMapping(value = "/medicamento", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> addMedicamento(@RequestBody Medicamento med) {
+    /*---Añade un nuevo medicamento al sistema y vuelve a la pantalla de listar---*/
+    @PostMapping(value = "/medicamento", consumes = "application/x-www-form-urlencoded")
+    public ResponseEntity<?> saveMedicamento(@ModelAttribute("medicamento") Medicamento medicamento, HttpServletResponse response) {
         try {
-            medicamentoService.createMedicamento(med);
-            return ResponseEntity.ok().body("Un nuevo medicamento se ha anyadido"); 
-        }
-        catch (Exception e) {
-            return ResponseEntity.internalServerError().body("El medicamento ya existe o hubo otro error: " + e.getMessage()); 
+            medicamentoService.createMedicamento(medicamento);
+            response.sendRedirect("/listMedicamento");
+            return ResponseEntity.ok().body("Medicamento creado correctamente");
+        } catch (IOException er) {
+            return ResponseEntity.status(500).body("Error creando el medicamento: " + er.getMessage());
         }
     }
 
 
-    // Crea una cuenta con el objeto Cuenta recibido en formato HTML Form
-    @PostMapping(value = "/medicamento", consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE} )
-    public ResponseEntity<?> saveHTMLMedicamento(Medicamento med) {
+    /*---Actualiza un medicamento del sistema y vuelve a la pantalla de listar---*/
+    @PutMapping(value = "/medicamento", consumes = "application/x-www-form-urlencoded")
+    public ResponseEntity<?> updateMedicamento(@ModelAttribute("medicamento") Medicamento medicamento, HttpServletResponse response) {
         try {
-            medicamentoService.createMedicamento(med);
-            return ResponseEntity.ok().body("Un nuevo medicamento se ha anyadido"); 
+            // El servicio espera el objeto con el ID ya seteado (viene en el ModelAttribute)
+            medicamentoService.updateMedicamento(medicamento);
+            response.sendRedirect("/listMedicamento");
+            return ResponseEntity.ok().body("Medicamento actualizado correctamente");
+        } catch (IOException er) {
+            return ResponseEntity.status(500).body("Error actualizando el medicamento: " + er.getMessage());
         }
-        catch (Exception e) {
-            return ResponseEntity.internalServerError().body("El medicamento ya existe o hubo otro error: " + e.getMessage()); 
-        }
-    }
+    } 
 
-    
-    
-    // Actualiza un medicamento 
-    @PutMapping("/medicamento")
-    public ResponseEntity<?> updateMedicamento (Medicamento med) {
-        try{
-            medicamentoService.updateMedicamento(med);
-            return ResponseEntity.ok().body("El medicamento se ha actualizado");
-        }
-        catch(Exception e){
-            return ResponseEntity.internalServerError().body("Error al actualizar el medicamento: " + e.getMessage());
-        }
-    }
-   
-    
-   
-    
-    // Elimina un medicamento 
-    @DeleteMapping("/medicamento")
-    public ResponseEntity<?> deleteMedicamento(@RequestBody Medicamento medicamento){
-        try{
-            medicamentoService.removeMedicamento(medicamento);
-            return ResponseEntity.ok().body("El medicamento se ha eliminado");
-        }
-        catch(Exception e){
-            return ResponseEntity.internalServerError().body("Error al eliminar el medicamento");
+    /*---Elimina un medicamento a partir de su ID y vuelve a la pantalla de listar---*/
+    @DeleteMapping("/medicamento/{id}")
+    public ResponseEntity<?> deleteMedicamento(@PathVariable("id") Long id, HttpServletResponse response) {
+        try {
+            medicamentoService.deleteMedicamento(id);
+            response.sendRedirect("/listMedicamento");
+            return ResponseEntity.ok().body("Medicamento eliminado correctamente");
+        } catch (IOException er) {
+            return ResponseEntity.status(500).body("Error eliminando el medicamento: " + er.getMessage());
         }
     }
 }

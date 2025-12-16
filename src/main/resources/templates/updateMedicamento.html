@@ -1,0 +1,29 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Editar Medicamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="medicamento.css" rel="stylesheet"/>
+</head>
+   
+<body>
+    <h1>Editar Medicamento</h1>
+ 
+    <form th:action="@{/medicamento/guardar}" th:object="${medicamento}" th:method="post">
+        
+        <input type="hidden" th:field="*{idMedicamento}" />
+
+        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
+        
+        <p>PrActivo: <input type="text" th:field="*{prActivo}" /></p>
+        
+        <p>VulnAnciano: <input type="text" th:field="*{vulnAnciano}" /></p>
+
+        <p>
+            <input class="boton" type="submit" value="Actualizar Medicamento" /> 
+            <input class="boton" type="reset" value="Restaurar valores" />
+        </p>
+    </form>
+    
+    <a th:href="@{/medicamentos}">Cancelar</a>
+</body>
+</html>

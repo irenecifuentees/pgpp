@@ -1,0 +1,26 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Añadir Medicamento</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="medicamento.css" rel="stylesheet"/>
+</head>
+   
+<body>
+    <h1>Añadir Medicamento</h1>
+ 
+    <form th:action="@{/medicamento}" th:object="${medicamento}" th:method="post">
+        <p>Nombre: <input type="text" th:field="*{nombre}" /></p>
+        
+        <p>PrActivo: <input type="text" th:field="*{prActivo}" /></p>
+
+        <p>VulnAnciano: <input type="text" th:field="*{vulnAnciano}" /></p>
+        
+        
+        <p>
+            <input class="boton" type="submit" value="Crear Medicamento" /> 
+            <input class="boton" type="reset" value="Reset" />
+        </p>
+    </form>
+    <a th:href="@{/}">Atrás</a>
+</body>
+</html>
