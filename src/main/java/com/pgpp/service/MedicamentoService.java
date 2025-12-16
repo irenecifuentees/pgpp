@@ -1,33 +1,23 @@
 package com.pgpp.service;
 
-import com.pgpp.model.Medicamento;
-import com.pgpp.repository.MedicamentoRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import com.pgpp.model.Medicamento;
+import com.pgpp.repository.RepositoryMedicamento;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MedicamentoService {
-
-    private final MedicamentoRepository repository;
-
-    public MedicamentoService(MedicamentoRepository repository) {
-        this.repository = repository;
+   
+    @Autowired
+    private RepositoryMedicamento repositoryMedicamento;
+    public List<Medicamento> getAllMedicamentos() {
+        return repositoryMedicamento.findAll();
     }
 
-    public List<Medicamento> findAll() {
-        return repository.findAll();
+    //Crear un nuevo medicamento con saveAndFlush
+    public Medicamento createMedicamento(Medicamento med) {
+        return repositoryMedicamento.saveAndFlush(med);
     }
-
-    public Medicamento findById(Long id) {
-        return repository.findById(id).orElse(null);
-    }
-
-    public Medicamento save(Medicamento medicamento) {
-        return repository.save(medicamento);
-    }
-
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
+    
 }
