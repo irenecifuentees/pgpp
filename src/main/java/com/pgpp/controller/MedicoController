@@ -1,0 +1,32 @@
+package com.pgpp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.pgpp.model.Medico;
+import com.pgpp.service.MedicoService;
+
+@Controller
+public class MedicoController {
+
+    @Autowired
+    private MedicoService medicoService;
+
+    // Formulario de Alta de Médico
+    @GetMapping("/addMedico")
+    public String addMedicoView(Model model) {
+        model.addAttribute("medico", new Medico());
+        return "addMedico";
+    }
+
+    // Guardar Médico
+    @PostMapping("/medico")
+    public String saveMedico(@ModelAttribute("medico") Medico medico) {
+        medicoService.createMedico(medico);
+        return "redirect:/"; // Vuelve al inicio tras crear
+    }
+}

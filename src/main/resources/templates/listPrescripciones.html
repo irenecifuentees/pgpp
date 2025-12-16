@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Pacientes y Prescripciones</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        /* Estilos básicos para diferenciar el contenido de la lista */
+        .paciente-panel { margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; }
+        .paciente-header { padding: 10px 15px; background-color: #f5f5f5; border-bottom: 1px solid #ddd; }
+        .paciente-body { padding: 15px; }
+        .tratamiento-list { margin-top: 10px; }
+        .tratamiento-list li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+<div class="container" style="margin-top: 50px;">
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3>💊 Listado de Pacientes y Tratamientos Prescritos</h3>
+        </div>
+        <div class="panel-body">
+
+            <div th:if="${#lists.isEmpty(pacientes)}">
+                <p class="alert alert-warning">No hay pacientes registrados en el sistema.</p>
+            </div>
+            
+            <div th:each="paciente : ${pacientes}" class="paciente-panel">
+                <div class="paciente-header">
+                    <h4 class="panel-title">
+                        <span th:text="${paciente.nombre}">Nombre Paciente</span> 
+                        <small th:text="'(DNI: ' + ${paciente.dni} + ')'"></small>
+                    </h4>
+                </div>
+                <div class="paciente-body">
+                    <strong>Fecha de Nacimiento:</strong> 
+                    <span th:text="${paciente.fechaNacimiento}"></span>
+                    <hr/>
+
+                    <h5>Tratamiento Actual:</h5>
+                    
+                    <ul class="list-group tratamiento-list" 
+                        th:if="${!#lists.isEmpty(paciente.tratamientos)}">
+                        
+                        <li th:each="med : ${paciente.tratamientos}" 
+                            class="list-group-item list-group-item-success">
+                            
+                            <strong><span th:text="${med.nombre}">Nombre Fármaco</span></strong> 
+                            (<span th:text="${med.prActivo}">P. Activo</span>) 
+                            - Vulnerable Anciano: <span th:text="${med.vulnAnciano}">Sí/No</span>
+                        </li>
+                    </ul>
+                    
+                    <p th:if="${#lists.isEmpty(paciente.tratamientos)}" class="alert alert-danger">
+                        Este paciente no tiene medicamentos prescritos actualmente.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-sm btn-info" th:href="@{/prescribir}">Realizar Nueva Prescripción</a>
+            <a class="btn btn-sm btn-default" th:href="@{/}">Volver al Menú Principal</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
