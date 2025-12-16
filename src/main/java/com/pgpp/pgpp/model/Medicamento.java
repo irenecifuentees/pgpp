@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -12,7 +12,7 @@ public class Medicamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @ManyToOne
+    //@ManyToOne
     //private PosibleTratamiento posibleTratamiento;
 
     private Long idMedicamento;   

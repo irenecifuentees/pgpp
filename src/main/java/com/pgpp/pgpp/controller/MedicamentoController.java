@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pgpp.pgpp.model.Medicamento;
+import com.pgpp.pgpp.model.MedicamentoService;
+
 @RestController
 
 
@@ -17,7 +19,7 @@ public class MedicamentoController {
 
     @Autowired
 
-    private com.pgpp.pgpp.model.MedicamentoService medicamentoService;
+    private MedicamentoService medicamentoService;
     
     @GetMapping("/medicamentos")
     public List<Medicamento> getAllMedicamentos() {
