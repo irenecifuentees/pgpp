@@ -1,0 +1,75 @@
+package com.pgpp.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.pgpp.model.Medicamento;
+import com.pgpp.repository.RepositoryMedicamento;
+
+@ExtendWith(MockitoExtension.class)
+public class MedicamentoServiceTest {
+
+    @Mock
+    RepositoryMedicamento repositoryMedicamento;
+
+    @InjectMocks
+    private MedicamentoService medicamentoService;
+
+    @Test
+    @DisplayName("Comprueba que se pueden obtener todos los medicamentos")
+    public void getAllMedicamentos_variosMedicamentos_obtieneLista() {
+        // Arrange
+        Medicamento m1 = new Medicamento();
+        Medicamento m2 = new Medicamento();
+        when(repositoryMedicamento.findAll()).thenReturn(Arrays.asList(m1, m2));
+
+        // Act
+        List<Medicamento> result = medicamentoService.getAllMedicamentos();
+
+        // Assert
+        assertEquals(2, result.size());
+        verify(repositoryMedicamento).findAll();
+    }
+
+    @Test
+    @DisplayName("Comprueba que se puede obtener un medicamento por id")
+    public void getMedicamento_idExistente_medicamentoObtenido() {
+        // Arrange
+        Long id = 1L;
+        Medicamento med = new Medicamento();
+        when(repositoryMedicamento.getReferenceById(id)).thenReturn(med);
+
+        // Act
+        Medicamento result = medicamentoService.getMedicamento(id);
+
+        // Assert
+        assertEquals(med, result);
+        verify(repositoryMedicamento).getReferenceById(id);
+    }
+
+    @Test
+    @DisplayName("Comprueba que se puede crear un medicamento")
+    public void createMedicamento_medicamentoNuevo_medicamentoGuardado() {
+        // Arrange
+        Medicamento med = new Medicamento();
+        when(repositoryMedicamento.saveAndFlush(med)).thenReturn(med);
+
+        // Act
+        Medicamento result = medicamentoService.createMedicamento(med);
+
+        // Assert
+        assertEquals(med, result);
+        verify(repositoryMedicamento).saveAndFlush(med);
+    }
+}

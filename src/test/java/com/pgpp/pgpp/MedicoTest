@@ -1,0 +1,59 @@
+package com.pgpp.model;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+public class MedicoTest {
+
+    private Medico medico;
+
+    @BeforeEach
+    public void setUp() {
+        medico = new Medico();
+    }
+
+    @Test
+    @DisplayName("Comprueba que el DNI heredado se obtiene correctamente")
+    public void dni_getDni_Correcto() {
+        // Arrange
+        String dni = "12345678A";
+        medico.setDni(dni);
+
+        // Act
+        String dniObtained = medico.getDni();
+
+        // Assert
+        assertEquals(dni, dniObtained);
+    }
+
+    @Test
+    @DisplayName("Comprueba que la especialidad se obtiene correctamente")
+    public void especialidad_getEspecialidad_Correcto() {
+        // Arrange
+        String especialidad = "Cardiologia";
+        medico.setEspecialidad(especialidad);
+
+        // Act
+        String espObtained = medico.getEspecialidad();
+
+        // Assert
+        assertEquals(especialidad, espObtained);
+    }
+
+    @Test
+    @DisplayName("Comprueba que el password se obtiene correctamente")
+    public void password_getPassword_Correcto() {
+        // Arrange
+        String pass = "secret123";
+        medico.setPassword(pass);
+
+        // Act
+        String passObtained = medico.getPassword();
+
+        // Assert
+        assertEquals(pass, passObtained);
+    }
+}
