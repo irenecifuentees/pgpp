@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicamentos - PGPP</title>
+</head>
+<body>
+
+<h1>Listado de Medicamentos</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Principio Activo</th>
+        <th>Acciones</th>
+    </tr>
+
+    <tr th:each="med : ${medicamentos}">
+        <td th:text="${med.id}"></td>
+        <td th:text="${med.nombre}"></td>
+        <td th:text="${med.prActivo}"></td>
+        <td>
+            <a th:href="@{/medicamentos/borrar/{id}(id=${med.id})}">
+                Borrar
+            </a>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>Nuevo Medicamento</h2>
+
+<form th:action="@{/medicamentos/crear}" th:object="${medicamento}" method="post">
+
+    <label>Nombre:</label>
+    <input type="text" th:field="*{nombre}" required />
+    <br><br>
+
+    <label>Principio activo:</label>
+    <input type="text" th:field="*{prActivo}" required />
+    <br><br>
+
+    <button type="submit">Guardar</button>
+</form>
+
+</body>
+</html>
