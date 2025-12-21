@@ -1,6 +1,56 @@
-<h3>🏥 Gestión Clínica</h3>
-<ul>
-    <li><a href="/listMedicamento">Gestión de Medicamentos</a></li>
-    <li><a href="/prescribir">Prescribir Tratamiento</a></li>
-    <li><a href="/listPacientesConTratamientos">Ver Pacientes y Tratamientos</a></li>
-</ul>
+
+<!--  
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gestion de Cuentas</title>
+</head>
+<body>
+    <h1>Gestion de Cuentas</h1>
+    <h2>Las operaciones disponibles son:</h2>
+    <lu>
+        <li> <a href="/listMedicamento"> Lista Medicamentos </a> </li>
+        <li> <a href="/addMedicamento"> Añadir Medicamento </a> </li>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PGPP</title>
+    <link rel="stylesheet" th:href="@{/medicamento.css}">
+</head>
+
+<body>
+    <div class="hero">
+        <div class="hero-content">
+
+            <!-- TEXTO -->
+            <div class="hero-text">
+                <h1>PGPP</h1>
+                <h2>Plataforma web para la gestión de pacientes polimedicados</h2>
+
+                <div class="hero-buttons">
+                    <a th:href="@{/listMedicamento}">Listar Medicamentos</a>
+                    <a th:href="@{/addMedicamento}">Añadir Medicamento</a>
+                </div>
+            </div>
+        <div class="hero-menu">
+            <h3>🏥 Gestión Clínica</h3>
+            <ul>
+                <li><a th:href="@{/listMedicamento}">Gestión de Medicamentos</a></li>
+                <li><a th:href="@{/prescribir}">Prescribir Tratamiento</a></li>
+                <li><a th:href="@{/listPacientesConTratamientos}">
+                    Ver Pacientes y Tratamientos
+                </a></li>
+            </ul>
+        </div>
+            <!-- IMAGEN -->
+            <div class="hero-image">
+                <img src="/img/pills.svg" alt="Medicamentos">
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
