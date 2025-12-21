@@ -1,0 +1,198 @@
+/*.boton{margin-right: 2%;}*/
+
+/*.boton{margin-right: 2%;} */
+
+/* ---------- ESTILO GENERAL ---------- */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* ---------- CONTENEDOR NORMAL (RESTO DE PÃGINAS) ---------- */
+.container {
+    background: #B8E4F4;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px #C5B4F4;
+    width: 420px;
+    margin: auto;
+    margin-top: 80px;
+    animation: fadeIn 0.5s ease;
+}
+
+/* ---------- TITULOS ---------- */
+h1 {
+    margin-bottom: 20px;
+    color: #ffffff;
+        text-shadow:
+        -3px -3px 0 #C5B4F4,
+         3px -3px 0 #C5B4F4,
+        -3px  3px 0 #C5B4F4,
+         3px  3px 0 #C5B4F4;
+}
+
+/* ---------- INPUTS ---------- */
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ---------- BOTONES GENERALES ---------- */
+.boton {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 6px;
+    transition: all 0.25s ease;
+}
+
+.boton:hover {
+    background-color: #1565c0;
+    transform: scale(1.05);
+}
+
+.boton:active {
+    transform: scale(0.95);
+}
+
+/* ---------- LINKS ---------- */
+a {
+    text-decoration: none;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+/* ---------- ANIMACIÃ“N ---------- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================================= */
+/* ======================= HERO ============================ */
+/* ========================================================= */
+
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('/img/hero.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1100px;
+    width: 100%;
+    padding: 40px;
+    align-items: center;
+}
+
+/* ---------- TEXTO HERO ---------- */
+.hero-text h1 {
+    font-size: 72px;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.hero-text h2 {
+    font-size: 22px;
+    font-weight: 400;
+    color: #ffffff;
+    margin-bottom: 40px;
+    text-shadow:
+        -1px -1px 0 #C5B4F4,
+         1px -1px 0 #C5B4F4,
+        -1px  1px 0 #C5B4F4,
+         1px  1px 0 #C5B4F4;    
+}
+
+/* ---------- BOTONES HERO ---------- */
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hero-buttons a {
+    background: #C5B4F4;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    width: 260px;
+    transition: all 0.3s ease;
+}
+
+.hero-buttons a:hover {
+    background: #C5B4F4;
+    transform: scale(1.05);
+}
+
+
+/* ---------- MENÚ SECUNDARIO (GESTIÓN CLÍNICA) ---------- */
+.hero-menu {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px dashed rgba(255,255,255,0.4);
+}
+
+.hero-menu h3 {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    text-shadow:
+        -1px -1px 0 #C5B4F4,
+         1px -1px 0 #C5B4F4,
+        -1px  1px 0 #C5B4F4,
+         1px  1px 0 #C5B4F4; 
+}
+
+.hero-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.hero-menu li {
+    margin-bottom: 6px;
+}
+
+.hero-menu a {
+    color: #ffffff;
+    font-size: 15px;
+    background: rgba(197, 180, 244, 0.6);
+    padding: 6px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.hero-menu a:hover {
+    background: rgba(197, 180, 244, 0.9);
+    transform: translateX(4px);
+}
+
+/* ---------- IMAGEN HERO ---------- */
+.hero-image img {
+    width: 550px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    margin-right: 200px;
+}

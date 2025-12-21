@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Medicamentos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong>Listado de Medicamentos</strong>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>IdMedicamento</th>
+                            <th>Nombre</th>
+                            <th>PrActivo</th>
+                            <th>VulnAnciano</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="medicamento : ${medicamentos}">
+                            <td th:text="${medicamento.idMedicamento}"></td>
+                            <td th:text="${medicamento.nombre}"></td>
+                            <td th:text="${medicamento.prActivo}"></td>
+                            <td th:text="${medicamento.vulnAnciano}"></td>
+                            <td>
+                                <div class="btn-group">
+                                    <form th:method="DELETE"
+                                          th:action="@{/medicamento/{id}(id=${medicamento.idMedicamento})}">
+                                        <input type="submit" class="delete btn btn-sm btn-danger"
+                                               value="Eliminar" />
+                                    </form>
+
+                                    <form th:method="GET"
+                                          th:action="@{/editMedicamento/{idMedicamento}(idMedicamento=${medicamento.idMedicamento})}">
+                                        <input type="submit" class="primary btn btn-sm btn-primary" 
+                                               value="Editar" />
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:if="${delete != null && delete}" class="alert alert-success">
+            <strong>OK </strong> El medicamento ha sido eliminado correctamente.
+        </div>
+        <div th:if="${delete != null && !delete}" class="alert alert-danger">
+            <strong>Error </strong> Error eliminando el medicamento.
+        </div>
+        
+        <div th:if="${update != null && update}" class="alert alert-success">
+            <strong>OK </strong> El medicamento ha sido actualizado correctamente.
+        </div>
+        <div th:if="${update != null && !update}" class="alert alert-danger">
+            <strong>Error </strong> Error al actualizar el medicamento.
+        </div>
+        
+        <div th:if="${create != null && create}" class="alert alert-success">
+            <strong>OK </strong> El medicamento ha sido creado correctamente.
+        </div>
+        <div th:if="${create != null && !create}" class="alert alert-danger">
+            <strong>Error </strong> Error al crear el medicamento.
+        </div>
+
+        <div class="panel-footer">
+            <a class="btn btn-sm btn-success" th:href="@{/addMedicamento}">Nuevo Medicamento</a> 
+            <a class="btn btn-sm btn-primary" th:href="@{/}">Atrás</a>
+        </div>
+    </div>
+</body>
+</html> 
